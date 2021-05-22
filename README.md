@@ -1,10 +1,8 @@
 # SQLAlchemy Challenge - Surfs Up!
 
-Add your Jupyter notebook and `app.py` to this folder. These will be the main scripts to run for analysis.
-
 ## Step 1 - Climate Analysis and Exploration
 
-Python and SQLAlchemy are used to examine a climate database from weather stations in Hawaii. Tables from an .sqlite file are reflected into classes and saved as 'Station' and 'Measurement'.
+Python and SQLAlchemy are used to examine a climate database from weather stations in Hawaii. In the jupyter notebook climate.ipynb, tables from an .sqlite file (which is saved to the Resources directory are reflected into classes and saved as 'Station' and 'Measurement'.
 
 ### Precipitation Analysis
 
@@ -27,7 +25,7 @@ Python and SQLAlchemy are used to examine a climate database from weather statio
 
 ## Step 2 - Climate App
 
-A Flask API is created tobased on the queries developed for Step 1.
+A Flask API is created tobased on the queries developed for Step 1. The file is named app.py.
 
 ### Routes
 
