@@ -1,17 +1,17 @@
 # SQLAlchemy Challenge - Surfs Up!
 
-## Step 1 - Climate Analysis and Exploration
+### Step 1 - Climate Analysis and Exploration
 
 Python and SQLAlchemy are used to examine a climate database from weather stations in Hawaii. In the jupyter notebook climate.ipynb, tables from an .sqlite file (which is saved to the Resources directory are reflected into classes and saved as 'Station' and 'Measurement'.
 
-### Precipitation Analysis
+#### Precipitation Analysis
 
 * Using the most recent date in the dataset, the last 12 months of precipitation data are retrieved and the query select only `date` and `prcp` columns from the class.
 * Query results are loaded to a Pandas DataFrame using the date column as the index.
 * The DataFrame values are sorted by `date` and then the `plot` method is used to create the plot of precipitation values over time.
 * Summary statistics are examined for the data using .describe().
 
-### Station Analysis
+#### Station Analysis
 
 * The total number of stations in the dataset are calculated by a query. The stations are listed in descending order by observation count, to identify the most active station.
 
@@ -23,11 +23,11 @@ Python and SQLAlchemy are used to examine a climate database from weather statio
 
 * The session is closed.
 
-## Step 2 - Climate App
+### Step 2 - Climate App
 
 A Flask API is created tobased on the queries developed for Step 1. The file is named app.py.
 
-### Routes
+#### Routes
 
 * `/` is the Home page and lists all routes that are available.
 * `/api/v1.0/precipitation`
