@@ -20,12 +20,6 @@ from flask import Flask, jsonify
 database_path = os.path.join('Resources', 'hawaii.sqlite')
 engine = create_engine(f'sqlite:///{database_path}')
 
-# db_file = os.path.dirname(__file__)
-# engine = create_engine(f'sqlite:///{db_file}/Resources/hawaii.sqlite')
-# for using both?
-# engine = create_engine(f'sqlite:///{db_file}/{database_path}')
-
-
 # reflect an existing database into a new model
 Base = automap_base()
 # reflect the tables
@@ -75,7 +69,7 @@ def precip():
     year_prior = dt.date(2017, 8, 23) - dt.timedelta(days=365)
     # Perform a query to retrieve the date and precipitation values
     results = session.query(Measurement.date, Measurement.prcp).\
-        filter(Measurement.date > year_prior).\
+        filter(Measurement.date >= year_prior).\
         order_by(Measurement.date.desc()).all()
 
     session.close()
