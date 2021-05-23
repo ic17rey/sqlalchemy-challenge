@@ -28,6 +28,9 @@ Base.prepare(engine, reflect=True)
 # Save reference to the precipitation measurements table
 Measurement = Base.classes.measurement
 
+# Save reference to the stations table
+Station = Base.classes.station
+
 # Create an app, passing the __name__
 app = Flask(__name__)
 
@@ -62,6 +65,7 @@ def about():
 
 @app.route('/api/v1.0/precipitation')
 def precip():
+    print('Server received request for precipitation page')
     # Create our session (link) from Python to database
     session = Session(engine)
     
@@ -74,6 +78,7 @@ def precip():
 
     session.close()
 
+    
     # Convert the query results to a dictionary
     # Use date as the key and prcp as the value
     all_precip = []
@@ -85,11 +90,33 @@ def precip():
     # Return the dictionary representation in JSON
     return jsonify(all_precip)
 
-# @app.route('/api/v1.0/stations')
-# def station_ids():
+@app.route('/api/v1.0/stations')
+def weather_stations():
+    print('Server received request for stations page')
+    # Create our session (link) from Python to database
+    session = Session(engine)
+    
+    results = session.query(Station.station).all()
+    
+    session.close()
+    
+    #all_stations = 
+    #test_variable = "Hi"
+    
 
-# @app.route('/api/v1.0/tobs')
-       
+    return f'work in progress'
+
+@app.route('/api/v1.0/tobs')
+def tobs_query():
+    print('Server received request for tobs page')
+    # Create our session (link) from Python to database
+    session = Session(engine)
+    
+    results = session.query(Measurement.tobs).all()
+    
+    session.close()
+
+    return f'work in progress'
 
 if __name__ == '__main__':
     app.run(debug=True)
