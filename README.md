@@ -2,7 +2,7 @@
 
 ### Step 1 - Climate Analysis and Exploration
 
-Python and SQLAlchemy are used to examine a climate database from weather stations in Hawaii. In the jupyter notebook climate.ipynb, tables from an .sqlite file (which is saved to the Resources directory are reflected into classes and saved as 'Station' and 'Measurement'.
+Python and SQLAlchemy are used to examine a climate database from weather stations in Hawaii. In the jupyter notebook climate.ipynb, tables from an .sqlite file (which is saved to the Resources directory) are reflected into classes and saved as 'Station' and 'Measurement'.
 
 #### Precipitation Analysis
 
