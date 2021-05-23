@@ -96,15 +96,12 @@ def weather_stations():
     # Create our session (link) from Python to database
     session = Session(engine)
     
-    results = session.query(Station.station).all()
+    results_stations = session.query(Measurement.station, func.count()).\
+        group_by(Measurement.station).order_by(func.count().desc()).all()
     
     session.close()
     
-    #all_stations = 
-    #test_variable = "Hi"
-    
-
-    return f'work in progress'
+    return jsonify(results_stations)   
 
 @app.route('/api/v1.0/tobs')
 def tobs_query():
