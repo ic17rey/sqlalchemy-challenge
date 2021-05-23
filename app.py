@@ -47,8 +47,8 @@ def home():
         f'/api/v1.0/precipitation<br/>'
         f'/api/v1.0/stations<br/>'
         f'/api/v1.0/tobs<br/>'
-        f'/api/v1.0/<start>/<br/>'
-        f'/api/v1.0/<start>/<end>'
+        f'/api/v1.0/start<start>/<br/>'
+        f'/api/v1.0/start/end<start>/<end>'
     )
 
 @app.route('/about')
@@ -93,27 +93,39 @@ def precip():
 @app.route('/api/v1.0/stations')
 def weather_stations():
     print('Server received request for stations page')
+
     # Create our session (link) from Python to database
     session = Session(engine)
     
-    results_stations = session.query(Measurement.station, func.count()).\
-        group_by(Measurement.station).order_by(func.count().desc()).all()
+    # Query for and group by measurement stations to display each station only once
+    results_stations = session.query(Measurement.station).group_by(Measurement.station).all()
     
     session.close()
     
-    return jsonify(results_stations)   
+    all_stations = list(np.ravel(results_stations))
 
+    return jsonify(all_stations)
+ 
 @app.route('/api/v1.0/tobs')
 def tobs_query():
     print('Server received request for tobs page')
+    
     # Create our session (link) from Python to database
     session = Session(engine)
     
-    results = session.query(Measurement.tobs).all()
+    # Copy in the year_prior variable already created in the jupyter notebook
+    year_prior = dt.date(2017, 8, 23) - dt.timedelta(days=365)
     
+    selections = [Measurement.station,
+        func.count(Measurement.tobs),
+        func.min(Measurement.tobs),
+        func.max(Measurement.tobs),
+        func.avg(Measurement.tobs)] 
+    most_active_analysis = session.query(*selections).filter(Measurement.station == 'USC00519281').\
+        filter(Measurement.date >= year_prior).all()
     session.close()
 
-    return f'work in progress'
+    return jsonify(most_active_analysis)
 
 if __name__ == '__main__':
     app.run(debug=True)
