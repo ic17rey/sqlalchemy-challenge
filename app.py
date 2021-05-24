@@ -127,5 +127,19 @@ def tobs_query():
 
     return jsonify(most_active_analysis)
 
+@app.route('/api/v1.0/start')
+def startdate ():
+
+    print('Server received request for api page allowing input of start date.')
+
+    return 'This is the endpoint for the route /api/v1.0/start'
+
+@app.route('/api/v1.0/start/end')
+def range_of_dates ():
+
+    print('Server received request for api page allowing input of start and end date.')
+
+    return 'This is the endpoint for the route /api/v1.0/start/end'
+
 if __name__ == '__main__':
     app.run(debug=True)
